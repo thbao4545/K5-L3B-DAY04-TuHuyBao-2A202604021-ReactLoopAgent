@@ -1,0 +1,22 @@
+E1: before=75 after=75
+E2: before=100 after=90
+E3: before=85 after=80
+E4: before=100 after=77
+E5: before=80 after=75
+E6: before=60 after=80
+A1: before=75 after=100
+A2: before=None after=100
+A3: before=95 after=75
+A4: before=100 after=100
+A5: before=25 after=85
+A6: before=65 after=75
+A7: before=65 after=75
+A8: before=75 after=80
+H1: before=60 after=60
+H2: before=100 after=50  <- NEW violation
+H3: before=95 after=95
+H4: before=65 after=100
+H5: before=70 after=75
+H6: before=60 after=80  <- violation fixed
+H7: before=75 after=35
+H8: before=85 after=75

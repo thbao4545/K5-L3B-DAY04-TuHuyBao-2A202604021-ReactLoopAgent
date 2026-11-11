@@ -22,8 +22,8 @@ Tổng: 240 phút, bao gồm 10 phút nghỉ. Eval gọi model thật cho cả a
 Chạy trực tiếp không cần LLM key:
 
 ```bash
-python3 -c 'import json; from status_tools import StatusTools; print(json.dumps(StatusTools().get_status("github", "Actions"), ensure_ascii=False, indent=2))'
-python3 -c 'import json; from status_tools import StatusTools; print(json.dumps(StatusTools().get_incident_details("cloudflare", "wp49bp8bqo6c"), ensure_ascii=False, indent=2))'
+python3 -c "import json; from status_tools import StatusTools; print(json.dumps(StatusTools().get_status('github', 'Actions'), ensure_ascii=False, indent=2))"
+python3 -c "import json; from status_tools import StatusTools; print(json.dumps(StatusTools().get_incident_details('cloudflare', 'wp49bp8bqo6c'), ensure_ascii=False, indent=2))"
 ```
 
 - `get_status(provider, component='')`: overall status, component khớp và tối đa 5 incident gần đây khớp chuỗi. Tool tìm trong 50 incident gần nhất; tìm không thấy **không** chứng minh incident không tồn tại.

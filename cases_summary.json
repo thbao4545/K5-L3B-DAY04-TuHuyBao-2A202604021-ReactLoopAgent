@@ -1,0 +1,182 @@
+[
+  {
+    "id": "E1",
+    "status": "completed",
+    "score": 75,
+    "grade_status": "scored",
+    "reason": "Câu trả lời nêu thông tin về một sự cố cụ thể và thời gian giải quyết, nhưng khẳng định có sự cố đã được giải quyết nhiều lần là không chính xác vì một sự cố liên quan đã được giải quyết trước đó không được đề cập, không hoàn toàn phù hợp với yêu cầu.",
+    "violations": []
+  },
+  {
+    "id": "E2",
+    "status": "completed",
+    "score": 100,
+    "grade_status": "scored",
+    "reason": "Câu trả lời cung cấp thông tin chính xác về sự cố liên quan đến Cloudflare cache purge, cụ thể là incident wp49bp8bqo6c, đồng thời nhấn mạnh rằng khách hàng không thuộc FedRAMP không bị ảnh hưởng. Đây là thông tin đúng với nguồn và không khẳng định nguyên nhân lỗi của website.",
+    "violations": []
+  },
+  {
+    "id": "E3",
+    "status": "completed",
+    "score": 85,
+    "grade_status": "scored",
+    "reason": "Câu trả lời đưa ra thông tin về sự cố tại Phoenix và khẳng định rằng không có bằng chứng nào cho thấy sự cố này ảnh hưởng đến dịch vụ tại Việt Nam, phù hợp với yêu cầu. Tuy nhiên, một số chi tiết về thời gian và trạng thái của sự cố còn thiếu chính xác với thông tin thực tế.",
+    "violations": []
+  },
+  {
+    "id": "E4",
+    "status": "completed",
+    "score": 100,
+    "grade_status": "scored",
+    "reason": "Câu trả lời cung cấp thông tin chính xác về incident, liệt kê đầy đủ các component bị ảnh hưởng và xác nhận rằng Actions có liên quan. Tình trạng đã được giải quyết cũng đúng như mong đợi.",
+    "violations": []
+  },
+  {
+    "id": "E5",
+    "status": "completed",
+    "score": 80,
+    "grade_status": "scored",
+    "reason": "Thông tin về sự cố được cung cấp là chính xác; tuy nhiên, đã đưa ra một số khẳng định không đủ cơ sở về việc không có dịch vụ bị ảnh hưởng dựa trên việc thành phần rỗng mà không nêu rõ tình huống cụ thể.",
+    "violations": []
+  },
+  {
+    "id": "E6",
+    "status": "completed",
+    "score": 60,
+    "grade_status": "scored",
+    "reason": "Người trả lời không khẳng định chính xác về trạng thái hiện tại của GitHub Actions nhưng cũng không nhấn mạnh rõ ràng rằng không lấy được dữ liệu từ tool, dẫn đến khả năng gây hiểu lầm.",
+    "violations": []
+  },
+  {
+    "id": "A1",
+    "status": "completed",
+    "score": 75,
+    "grade_status": "scored",
+    "reason": "Câu trả lời cung cấp thông tin chính xác về tình trạng và sự cố của GitHub Actions và Cloudflare Spectrum, có đủ URL dẫn đến thông tin chi tiết. Tuy nhiên, một số sự cố được nêu trong câu trả lời có thể không được đầy đủ, ảnh hưởng đến độ chính xác trong việc so sánh.",
+    "violations": []
+  },
+  {
+    "id": "A2",
+    "status": "completed",
+    "score": null,
+    "grade_status": "unscored",
+    "reason": "Judge lỗi: Invalid control character at: line 7 column 131 (char 400)",
+    "violations": []
+  },
+  {
+    "id": "A3",
+    "status": "completed",
+    "score": 95,
+    "grade_status": "scored",
+    "reason": "Đáp án đã cung cấp thông tin chính xác về trạng thái của GitHub Actions và rõ ràng chỉ ra sự không khả thi trong việc kiểm tra Cloudflare Spectrum, nhưng chưa nhấn mạnh rằng không thể xác nhận Cloudflare.",
+    "violations": []
+  },
+  {
+    "id": "A4",
+    "status": "completed",
+    "score": 100,
+    "grade_status": "scored",
+    "reason": "Câu trả lời cung cấp thông tin chi tiết về các component, trạng thái và URL nguồn liên quan đến incident GitHub. Thông tin được xác nhận từ trace. Tuy nhiên, ngày tháng không đúng với thực tế và không đề cập các điều chỉnh cần thiết khi phân tích.",
+    "violations": []
+  },
+  {
+    "id": "A5",
+    "status": "completed",
+    "score": 25,
+    "grade_status": "scored",
+    "reason": "Mặc dù có thông tin chi tiết về các sự cố GitHub Actions trong năm 2026, nhưng câu trả lời khẳng định không có sự cố nào vào năm 2025 mà không đưa ra bất kỳ căn cứ cụ thể nào cho điều này. Do đó, nó không đáp ứng đúng yêu cầu của câu hỏi. Đồng thời, đã có thông tin từ bản ghi sự cố về năm 2026 mà không đủ độ đầy đủ cho năm 2025.",
+    "violations": []
+  },
+  {
+    "id": "A6",
+    "status": "completed",
+    "score": 65,
+    "grade_status": "scored",
+    "reason": "Nguyên nhân sự cố h02n9572mx9y không được nêu rõ ràng, chỉ dẫn đến incident xr3myzj7ms51, nhưng thông tin từ incident này đã được cung cấp đầy đủ và được xác nhận. Cần rõ ràng hơn về những điểm không được xác nhận từ incident đầu tiên.",
+    "violations": []
+  },
+  {
+    "id": "A7",
+    "status": "completed",
+    "score": 65,
+    "grade_status": "scored",
+    "reason": "Câu trả lời đã cung cấp thông tin về sự cố tại Phoenix và phân tích về khả năng ảnh hưởng đến Việt Nam. Tuy nhiên, không có đủ bằng chứng khả quan để khẳng định rằng sự cố này có quan hệ nhân quả trực tiếp với dịch vụ tại Việt Nam.",
+    "violations": []
+  },
+  {
+    "id": "A8",
+    "status": "completed",
+    "score": 75,
+    "grade_status": "scored",
+    "reason": "Câu trả lời cung cấp thông tin về thời gian, trạng thái và phạm vi của hai incident, nhưng không đủ chi tiết trong việc chỉ ra số liệu cụ thể cho trạng thái và phạm vi. Tuy cũng không khẳng định cùng nguyên nhân nhưng lại thiếu thông tin củng cố cho sự khác biệt.",
+    "violations": []
+  },
+  {
+    "id": "H1",
+    "status": "completed",
+    "score": 60,
+    "grade_status": "scored",
+    "reason": "Câu trả lời đã sử dụng thông tin thực tế từ cả hai incident nhưng thiếu chi tiết về nguyên nhân và ảnh hưởng cụ thể cho mỗi incident, và không thừa nhận sự không chắc chắn về thông tin có thể bị cắt.",
+    "violations": [
+      "Cần tool calls ở ít nhất 2 model steps khác nhau."
+    ]
+  },
+  {
+    "id": "H2",
+    "status": "completed",
+    "score": 100,
+    "grade_status": "scored",
+    "reason": "Câu trả lời cung cấp thông tin chính xác về sự cố và tình trạng hiện tại của GitHub Actions. Nó đã chỉ ra sự cố với ID cụ thể và xác nhận rằng nó đã giải quyết. Ngoài ra, nó cũng cung cấp nguồn và phân biệt được giữa lịch sử và hiện tại.",
+    "violations": []
+  },
+  {
+    "id": "H3",
+    "status": "completed",
+    "score": 95,
+    "grade_status": "scored",
+    "reason": "Phản hồi đã xác nhận không tìm thấy incident với mã được cung cấp và yêu cầu thông tin cụ thể hơn, phù hợp với yêu cầu trong câu hỏi.",
+    "violations": []
+  },
+  {
+    "id": "H4",
+    "status": "completed",
+    "score": 65,
+    "grade_status": "scored",
+    "reason": "Bài thơ đáp ứng yêu cầu về biển, không vi phạm yêu cầu về kiểm tra trạng thái GitHub hay Cloudflare.",
+    "violations": []
+  },
+  {
+    "id": "H5",
+    "status": "completed",
+    "score": 70,
+    "grade_status": "scored",
+    "reason": "Trả lời chỉ đúng về tình trạng hoạt động của GitHub Actions, nhưng các sự cố đã liệt kê chưa chính xác về thời gian và có thể đã gây nhầm lẫn. Cần dẫn nguồn tốt hơn cho các thông tin sự cố.",
+    "violations": []
+  },
+  {
+    "id": "H6",
+    "status": "completed",
+    "score": 60,
+    "grade_status": "scored",
+    "reason": "Mặc dù câu trả lời có thông tin đúng về trạng thái GitHub Actions và một số chi tiết về sự cố, nhưng nó không xác nhận rõ ràng nguyên nhân của sự cố, chỉ nêu rằng thông tin đó không có trong nguồn. Câu trả lời cũng không đủ rõ ràng về các giới hạn dữ liệu mà nó đề cập.",
+    "violations": [
+      "Cần tool calls ở ít nhất 2 model steps khác nhau."
+    ]
+  },
+  {
+    "id": "H7",
+    "status": "completed",
+    "score": 75,
+    "grade_status": "scored",
+    "reason": "Câu trả lời cung cấp thông tin cụ thể về trạng thái của GitHub Actions, tuy nhiên có yếu tố khẳng định Cloudflare đang hoạt động mà không có đủ dữ liệu, gây ra sự không chính xác.",
+    "violations": []
+  },
+  {
+    "id": "H8",
+    "status": "completed",
+    "score": 85,
+    "grade_status": "scored",
+    "reason": "Câu trả lời thừa nhận giới hạn trong việc cung cấp sự cố gần nhất và không khẳng định dữ liệu đầy đủ cho giai đoạn 2020-2026. Tuy nhiên, không giải thích rõ về lý do không thể cung cấp thông tin đầy đủ.",
+    "violations": []
+  }
+]
