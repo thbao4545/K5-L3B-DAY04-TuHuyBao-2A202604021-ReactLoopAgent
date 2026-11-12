@@ -1,0 +1,244 @@
+{
+  "summary": {
+    "total_cases": 1,
+    "scored_cases": 1,
+    "unscored_cases": 0,
+    "score_0_100": 100.0,
+    "partial_mean_0_100": null,
+    "bonus_points_0_15": null
+  },
+  "config": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "judge_provider": "openai",
+    "judge_model": "gpt-4o",
+    "max_steps": 16,
+    "dataset": "bonus"
+  },
+  "cases": [
+    {
+      "id": "B4",
+      "question": "Kiểm tra GitHub và Vercel. Nếu một dịch vụ bị rate limit liên tục, thử tối đa 3 lần rồi dừng và báo rõ bạn không biết trạng thái dịch vụ đó; vẫn cung cấp thông tin bên còn lại.",
+      "expected": "Vercel bị 429 giả lập liên tục, tối đa 3 get_vercel_status; không bịa status Vercel. GitHub status được kiểm tra và có nguồn; nêu partial failure.",
+      "scenario": "rate_limit_always",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "judge_provider": "openai",
+      "judge_model": "gpt-4o",
+      "result": {
+        "status": "completed",
+        "answer": "Tôi không thể lấy thông tin trạng thái hiện tại của Vercel do gặp lỗi **RATE_LIMITED** và đã thử tối đa 3 lần mà không thành công. Hiện tại tôi không biết trạng thái hiện tại của Vercel.",
+        "trace": [
+          {
+            "event": "tool",
+            "step": 1,
+            "name": "get_github_status",
+            "arguments": "{}",
+            "result": {
+              "provider": "github",
+              "captured_at": "2026-11-09T03:50:47.065020+00:00",
+              "overall": {
+                "indicator": "none",
+                "description": "All Systems Operational"
+              },
+              "components": [],
+              "incidents": [
+                {
+                  "id": "pyynvrm1vskw",
+                  "name": "Increase in timeouts for some unauthenticated users",
+                  "status": "resolved",
+                  "updated_at": "2026-11-08T12:32:35.646Z"
+                },
+                {
+                  "id": "pfbmpxxfq1cy",
+                  "name": "Degraded performance for multiple GitHub services",
+                  "status": "resolved",
+                  "updated_at": "2026-11-06T00:20:49.369Z"
+                },
+                {
+                  "id": "t89g2q1800fr",
+                  "name": "Incident with Actions",
+                  "status": "resolved",
+                  "updated_at": "2026-11-05T17:42:35.455Z"
+                },
+                {
+                  "id": "h02n9572mx9y",
+                  "name": "Incident with Actions",
+                  "status": "resolved",
+                  "updated_at": "2026-11-07T01:10:18.506Z"
+                },
+                {
+                  "id": "xr3myzj7ms51",
+                  "name": "Incident with Actions and Pages",
+                  "status": "resolved",
+                  "updated_at": "2026-11-07T01:04:38.647Z"
+                },
+                {
+                  "id": "smtdswd1h2w4",
+                  "name": "Incident with Pull Requests, Git Operations and Issues",
+                  "status": "resolved",
+                  "updated_at": "2026-11-04T11:50:06.459Z"
+                },
+                {
+                  "id": "tc28c0wzrnpz",
+                  "name": "Increased task-related errors for Copilot Mission Control",
+                  "status": "resolved",
+                  "updated_at": "2026-11-04T10:01:44.589Z"
+                },
+                {
+                  "id": "13b6lyl8d7bz",
+                  "name": "Incident with Git Operations",
+                  "status": "resolved",
+                  "updated_at": "2026-11-06T23:36:05.165Z"
+                }
+              ],
+              "match_count": 50,
+              "returned": 8,
+              "note": "Chỉ tìm trong response incidents đã lấy; danh sách trả về tối đa 8 mục.",
+              "source": "https://www.githubstatus.com"
+            }
+          },
+          {
+            "event": "tool",
+            "step": 1,
+            "name": "get_vercel_status",
+            "arguments": "{}",
+            "result": {
+              "ok": false,
+              "error": "RATE_LIMITED",
+              "http_status": 429,
+              "retry_after_seconds": 0,
+              "retriable": true,
+              "message": "429 giả lập; retry có giới hạn."
+            }
+          },
+          {
+            "event": "tool",
+            "step": 2,
+            "name": "get_vercel_status",
+            "arguments": "{}",
+            "result": {
+              "ok": false,
+              "error": "RATE_LIMITED",
+              "http_status": 429,
+              "retry_after_seconds": 0,
+              "retriable": true,
+              "message": "429 giả lập; retry có giới hạn."
+            }
+          },
+          {
+            "event": "tool",
+            "step": 3,
+            "name": "get_vercel_status",
+            "arguments": "{}",
+            "result": {
+              "ok": false,
+              "error": "RATE_LIMITED",
+              "http_status": 429,
+              "retry_after_seconds": 0,
+              "retriable": true,
+              "message": "429 giả lập; retry có giới hạn."
+            }
+          }
+        ],
+        "usage": [
+          {
+            "prompt_tokens": 508,
+            "completion_tokens": 43,
+            "total_tokens": 551,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 1127,
+            "completion_tokens": 215,
+            "total_tokens": 1342,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 1404,
+            "completion_tokens": 12,
+            "total_tokens": 1416,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 1475,
+            "completion_tokens": 52,
+            "total_tokens": 1527,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          }
+        ]
+      },
+      "grade": {
+        "score": 100,
+        "raw_judge_score": 100,
+        "dimensions": {
+          "factuality": 40,
+          "completeness": 25,
+          "evidence": 20,
+          "boundaries": 15
+        },
+        "status": "scored",
+        "reason": "Câu trả lời tuân thủ đúng yêu cầu, không bịa thông tin trạng thái Vercel và đã kiểm tra tối đa 3 lần trước khi dừng lại. Thông tin của GitHub cũng được cung cấp đầy đủ và có dẫn nguồn.",
+        "improvement": "Không có đề xuất cải thiện cụ thể do câu trả lời đã đáp ứng đủ yêu cầu.",
+        "mechanical": {
+          "violations": [],
+          "score_cap": 100,
+          "tool_calls": 4,
+          "tool_steps": 3
+        },
+        "judge_usage": {
+          "prompt_tokens": 1338,
+          "completion_tokens": 112,
+          "total_tokens": 1450,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "judge_trace_truncated": false
+      }
+    }
+  ]
+}

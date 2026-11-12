@@ -1,0 +1,152 @@
+{
+  "summary": {
+    "total_cases": 1,
+    "scored_cases": 1,
+    "unscored_cases": 0,
+    "score_0_100": 90.0,
+    "partial_mean_0_100": null,
+    "bonus_points_0_15": null
+  },
+  "config": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "judge_provider": "openai",
+    "judge_model": "gpt-4o",
+    "max_steps": 16,
+    "dataset": "bonus"
+  },
+  "cases": [
+    {
+      "id": "B3",
+      "question": "Kiểm tra trạng thái Vercel hiện tại theo snapshot. Nếu gặp rate limit, thử lại có giới hạn và cho biết kết quả cùng nguồn.",
+      "expected": "Lần đầu get_vercel_status trả 429 giả lập, lần sau thành công none/All Systems Operational. Nêu timestamp và nguồn; không coi 429 là outage Vercel.",
+      "scenario": "rate_limit_once",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "judge_provider": "openai",
+      "judge_model": "gpt-4o",
+      "result": {
+        "status": "completed",
+        "answer": "Trạng thái hiện tại của Vercel (tìm theo \"snapshot\") là: Tất cả hệ thống đều hoạt động bình thường (\"All Systems Operational\"). Không có sự cố nào liên quan đến \"snapshot\" được ghi nhận. \n\nNguồn thông tin: [Vercel Status](https://www.vercel-status.com).",
+        "trace": [
+          {
+            "event": "tool",
+            "step": 1,
+            "name": "get_vercel_status",
+            "arguments": "{\"component\":\"snapshot\"}",
+            "result": {
+              "ok": false,
+              "error": "RATE_LIMITED",
+              "http_status": 429,
+              "retry_after_seconds": 0,
+              "retriable": true,
+              "message": "429 giả lập; retry có giới hạn."
+            }
+          },
+          {
+            "event": "tool",
+            "step": 2,
+            "name": "get_vercel_status",
+            "arguments": "{\"component\":\"snapshot\"}",
+            "result": {
+              "provider": "vercel",
+              "captured_at": "2026-11-10T14:45:50.457875+00:00",
+              "overall": {
+                "indicator": "none",
+                "description": "All Systems Operational"
+              },
+              "components": [],
+              "incidents": [],
+              "match_count": 0,
+              "returned": 0,
+              "note": "Chỉ tìm trong response incidents đã lấy; danh sách trả về tối đa 8 mục.",
+              "source": "https://www.vercel-status.com"
+            }
+          }
+        ],
+        "usage": [
+          {
+            "prompt_tokens": 489,
+            "completion_tokens": 16,
+            "total_tokens": 505,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 564,
+            "completion_tokens": 16,
+            "total_tokens": 580,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          {
+            "prompt_tokens": 697,
+            "completion_tokens": 69,
+            "total_tokens": 766,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          }
+        ]
+      },
+      "grade": {
+        "score": 90,
+        "raw_judge_score": 90,
+        "dimensions": {
+          "factuality": 35,
+          "completeness": 20,
+          "evidence": 20,
+          "boundaries": 15
+        },
+        "status": "scored",
+        "reason": "Câu trả lời đúng về trạng thái Vercel là 'All Systems Operational' và không coi 429 là sự cố. Nêu nguồn và trạng thái chính xác nhưng thiếu timestamp như yêu cầu. Dùng công cụ phù hợp và xử lý rate limit đúng cách.",
+        "improvement": "Nên bao gồm timestamp khi thành công và ghi nhận từ nguồn để hoàn thiện yêu cầu hơn.",
+        "mechanical": {
+          "violations": [],
+          "score_cap": 100,
+          "tool_calls": 2,
+          "tool_steps": 2
+        },
+        "judge_usage": {
+          "prompt_tokens": 773,
+          "completion_tokens": 115,
+          "total_tokens": 888,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "judge_trace_truncated": false
+      }
+    }
+  ]
+}
