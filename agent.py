@@ -47,6 +47,7 @@ _NEG_WORDS = ('không thể', 'không kiểm tra', 'không xác nhận', 'chưa'
 
 _URL_PROVIDER = {'githubstatus.com': 'github', 'cloudflarestatus.com': 'cloudflare'}
 _INCIDENT_LINK_RE = re.compile(r'(githubstatus\.com|cloudflarestatus\.com)/incidents/([A-Za-z0-9]+)')
+_STATUS_TOOL_RE = re.compile(r'^get_(\w+)_status$')  # tool bonus: get_<provider>_status
 
 
 def _referenced_incident_links(text):
@@ -77,8 +78,10 @@ def run_agent(question, provider, tools, max_steps=6):
     failed_providers = set()   # provider có tool lỗi/timeout
     queried_incidents = set()  # (provider, incident_id) đã gọi get_incident_details
     pending_links = set()      # (provider, incident_id) được nhắc tới nhưng chưa tra
+    status_providers_with_incidents = set()  # provider (bonus) có incident tìm thấy qua get_*_status
     status_reminded = False    # chỉ nhắc 1 lần
     link_reminded = False      # chỉ nhắc 1 lần
+    detail_reminded = False    # chỉ nhắc 1 lần
 
     for step in range(1, max_steps + 1):
         try:
@@ -114,6 +117,9 @@ def run_agent(question, provider, tools, max_steps=6):
                         failed_providers.add(str(json.loads(call['arguments']).get('provider', '')).lower())
                     except (json.JSONDecodeError, AttributeError):
                         pass
+                status_match = _STATUS_TOOL_RE.match(call['name'])
+                if status_match and result.get('ok') is not False and result.get('incidents'):
+                    status_providers_with_incidents.add(status_match.group(1))
                 messages.append({'role': 'tool', 'tool_call_id': call['id'],
                                   'content': json.dumps(result, ensure_ascii=False)})
             continue
@@ -135,6 +141,17 @@ def run_agent(question, provider, tools, max_steps=6):
                              'Viết lại câu trả lời: nói rõ không kiểm tra được provider đó, '
                              'không kết luận operational/bình thường cho nó, kể cả khi user yêu cầu. '
                              'Giữ nguyên phần có dữ liệu và URL nguồn.'})
+            continue
+        if (len(status_providers_with_incidents) >= 2 and not queried_incidents
+                and not detail_reminded and step < max_steps):
+            detail_reminded = True
+            trace.append({'event': 'validation_missing_detail', 'step': step,
+                          'providers': sorted(status_providers_with_incidents)})
+            messages.append({'role': 'user', 'content':
+                             'Câu hỏi cần đối chiếu incident của nhiều dịch vụ nhưng chưa gọi '
+                             'get_incident_details cho ID nào. Nếu cần bằng chứng/nguồn cụ thể '
+                             'cho từng incident, hãy gọi get_incident_details trước khi trả lời '
+                             'lại; nếu không cần, giữ nguyên câu trả lời.'})
             continue
         pending_links -= queried_incidents
         if pending_links and not link_reminded and step < max_steps:
