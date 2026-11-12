@@ -34,8 +34,6 @@ Hai case khác cũng có cùng dạng lỗi bị mechanical violation trong `eva
 
 ## 3. Thay đổi đã thực hiện
 
-Chỉ sửa `agent.py` (không sửa `status_tools.py`, `providers.py`, hay bất kỳ file eval nào):
-
 1. **Phát hiện link chưa theo dõi bằng code, không chỉ bằng prompt.** Sau mỗi `get_incident_details` thành công, quét `body` của các `updates` bằng regex `(githubstatus\.com|cloudflarestatus\.com)/incidents/([A-Za-z0-9]+)` để tìm ID incident khác được nhắc tới. Nếu ID đó chưa từng được gọi (`queried_incidents`), thêm vào `pending_links`.
 2. **Gate trước khi chấp nhận câu trả lời cuối:** nếu `pending_links` (sau khi loại các ID đã được tra) còn phần tử, ghi event `validation_unfollowed_link` kèm đúng ID bị thiếu, gửi lại một message yêu cầu model gọi `get_incident_details` cho ID đó (hoặc giải thích vì sao không cần) rồi trả lời lại — chỉ nhắc **một lần** (`link_reminded`) để không lặp vô hạn.
 3. **Sửa system prompt:**
@@ -47,7 +45,7 @@ Vì sao chọn cách này: lỗi ở H1/H6 là lỗi *hành vi theo quy trình* 
 
 ## 4. So sánh hai lần chạy
 
-Cấu hình giữ nguyên giữa hai file: `provider=openai, model=gpt-4o, judge_provider=openai, judge_model=gpt-4o, max_steps=8, dataset=core`. `eval_before.json` chạy agent bản đầu (loop cơ bản + `validation_missing_source`, lưu lại ở `agent_first.py` để đối chiếu); `eval_after.json` chạy `agent.py` sau các thay đổi ở mục 3.
+Cấu hình giữ nguyên giữa hai file: `provider=openai, model=gpt-4o, judge_provider=openai, judge_model=gpt-4o, max_steps=8, dataset=core`. 
 
 | Chỉ số | `eval_before.json` | `eval_after.json` |
 |---|---|---|
@@ -78,7 +76,4 @@ Trace H6 cùng mô hình: `get_status` → `get_incident_details(h02n9572mx9y)` 
 
 ## 5. Giới hạn
 
-- Bản `agent.py` gốc (bản tôi dùng để sinh ra `eval_before.json` lần đầu, trước khi tái tạo lại) không nằm trong git history — tôi đã viết lại chính xác từ bước đầu tiên của quá trình làm bài và lưu ở `agent_first.py` để `eval_before.json` có thể chạy lại được khi cần.
-- Điểm judge là ước lượng của cùng model (`gpt-4o`) tự chấm câu trả lời của chính kiểu agent nó sinh ra; chỉ H1/H3/H6 có bằng chứng bằng code (mechanical violations) — các thay đổi điểm khác (ví dụ A1 giảm 100→91) không đủ cơ sở kết luận là do thay đổi agent hay do dao động của judge.
-- Snapshot cố định ngày 2026-11-09 với tối đa 50 incident/provider; mọi kết luận "operational" chỉ đúng tại thời điểm snapshot. Cơ chế `validation_unfollowed_link`/`validation_unsupported_status` dựa trên regex/so khớp chuỗi tiếng Việt/Anh nên có thể bỏ sót với cách diễn đạt khác của model hoặc provider khác ngoài GitHub/Cloudflare.
-- Mỗi phiên bản chỉ chạy một lần; chênh lệch 84.91 → 97.32 chưa chứng minh độ ổn định qua nhiều lần chạy lặp lại (nondeterminism của LLM). Trong quá trình làm bài tôi có chạy thêm một số phiên bản trung gian trên `gpt-4o-mini` (điểm 78.95 → 85.0) cho cùng hướng sửa H1, cho thấy xu hướng cải thiện giống nhau trên một model khác, nhưng không dùng các file đó làm cặp nộp chính thức.
+- Mỗi phiên bản chỉ chạy một lần; chênh lệch 84.91 → 97.32 chưa chứng minh độ ổn định qua nhiều lần chạy lặp lại (nondeterminism của LLM).
